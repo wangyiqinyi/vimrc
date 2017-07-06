@@ -22,6 +22,8 @@ source $VIMEXTEND/vimrcs/extended.vim
 source $VIMEXTEND/sources_non_forked/ack.vim/plugin/ack.vim
 
 set number
+set wfh
+set wfw
 
 """"""""""""""""""""""""""""""
 " => vim-session plugin
@@ -30,3 +32,9 @@ let g:session_autosave='yes'
 let g:session_autosave_periodic=1
 let g:session_lock_enabled=1
 let g:session_autoload='yes'
+
+""""""""""""""""""""""""""""""
+" => vim-grepper plugin
+""""""""""""""""""""""""""""""
+nnoremap <leader>ag :Grepper -tool ag -open -highlight -switch -cword -noprompt -stop 1000<cr>
+
