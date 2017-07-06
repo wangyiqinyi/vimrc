@@ -800,7 +800,7 @@ function! xolox#session#restart_cmd(bang, args) abort " {{{2
     call xolox#session#save_cmd(name, a:bang, 'RestartVim')
     " Generate the Vim command line.
     let progname = xolox#misc#escape#shell(xolox#misc#os#find_vim())
-    let command = progname . ' -g -c ' . xolox#misc#escape#shell('OpenSession\! ' . fnameescape(name))
+    let command = progname . '/MAX -g -c ' . xolox#misc#escape#shell('OpenSession\! ' . fnameescape(name))
     let args = matchstr(a:args, '^\s*|\s*\zs.\+$')
     if !empty(args)
       let command .= ' -c ' . xolox#misc#escape#shell(args)

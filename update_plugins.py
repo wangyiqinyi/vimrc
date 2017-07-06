@@ -55,6 +55,7 @@ lightline.vim https://github.com/itchyny/lightline.vim
 tpope-vim-abolish https://github.com/tpope/tpope-vim-abolish
 vim-misc https://github.com/xolox/vim-misc
 vim-session https://github.com/xolox/vim-session
+vim-grepper https://github.com/mhinz/vim-grepper
 """.strip()
 
 GITHUB_ZIP = '%s/archive/master.zip'
