@@ -1,16 +1,18 @@
 try:
     import concurrent.futures as futures
+    import urllib.request
 except ImportError:
     try:
         import futures
+        import urllib.request
     except ImportError:
         futures = None
+        import urllib2
+        import httplib
 
 import zipfile
 import shutil
 import tempfile
-import urllib2
-import httplib
 
 from os import path
 
@@ -56,6 +58,7 @@ tpope-vim-abolish https://github.com/tpope/tpope-vim-abolish
 vim-misc https://github.com/xolox/vim-misc
 vim-session https://github.com/xolox/vim-session
 vim-grepper https://github.com/mhinz/vim-grepper
+vim-easytags https://github.com/xolox/vim-easytags
 """.strip()
 
 GITHUB_ZIP = '%s/archive/master.zip'
@@ -67,13 +70,20 @@ def download_extract_replace(plugin_name, zip_path, temp_dir, source_dir):
     temp_zip_path = path.join(temp_dir, plugin_name)
 
     # Download and extract file in temp dir
-    r = urllib2.urlopen(zip_path)
     with open(temp_zip_path, "wb") as fp:
         contents = None
-        try:
-            contents = r.read()
-        except httplib.IncompleteRead as e:
-            contents = e.partial
+        if futures:
+            try:
+                r = urllib.request.urlopen(zip_path)
+                contents = r.read()
+            except Exception as e:
+                print("Error: {0}".format(e))
+        else:
+            r = urllib2.urlopen(zip_path)
+            try:
+                contents = r.read()
+            except httplib.IncompleteRead as e:
+                contents = e.partial
         fp.write(contents)
 
     zip_f = zipfile.ZipFile(temp_zip_path)
