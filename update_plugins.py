@@ -9,7 +9,8 @@ except ImportError:
 import zipfile
 import shutil
 import tempfile
-import requests
+import urllib2
+import httplib
 
 from os import path
 
@@ -51,7 +52,9 @@ vim-flake8 https://github.com/nvie/vim-flake8
 vim-pug https://github.com/digitaltoad/vim-pug
 vim-yankstack https://github.com/maxbrunsfeld/vim-yankstack
 lightline.vim https://github.com/itchyny/lightline.vim
-vim-abolish https://github.com/tpope/vim-abolish
+tpope-vim-abolish https://github.com/tpope/tpope-vim-abolish
+vim-misc https://github.com/xolox/vim-misc
+vim-session https://github.com/xolox/vim-session
 """.strip()
 
 GITHUB_ZIP = '%s/archive/master.zip'
@@ -63,8 +66,14 @@ def download_extract_replace(plugin_name, zip_path, temp_dir, source_dir):
     temp_zip_path = path.join(temp_dir, plugin_name)
 
     # Download and extract file in temp dir
-    req = requests.get(zip_path)
-    open(temp_zip_path, 'wb').write(req.content)
+    r = urllib2.urlopen(zip_path)
+    with open(temp_zip_path, "wb") as fp:
+        contents = None
+        try:
+            contents = r.read()
+        except httplib.IncompleteRead as e:
+            contents = e.partial
+        fp.write(contents)
 
     zip_f = zipfile.ZipFile(temp_zip_path)
     zip_f.extractall(temp_dir)
@@ -77,7 +86,7 @@ def download_extract_replace(plugin_name, zip_path, temp_dir, source_dir):
 
     try:
         shutil.rmtree(plugin_dest_path)
-    except OSError:
+    except:
         pass
 
     shutil.move(plugin_temp_path, plugin_dest_path)
