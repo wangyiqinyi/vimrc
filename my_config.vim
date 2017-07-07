@@ -24,15 +24,16 @@ source $VIMEXTEND/sources_non_forked/ack.vim/plugin/ack.vim
 set number
 set wfh
 set wfw 
-" let g:molokai_original=1
+let g:molokai_original=1
 let g:rehash256 = 1
 colorscheme molokai
 " Location List Window
 autocmd FileType python nmap <buffer> <cr> <cr>:lcl<cr>
 
 " Fold
-set foldmethod=indent
+set foldmethod=marker
 set foldlevelstart=20
+set foldcolumn=1
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 " vnoremap <Space> zf
 " nnoremap <silent> <a-1> zM <CR>
