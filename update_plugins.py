@@ -59,6 +59,7 @@ vim-misc https://github.com/xolox/vim-misc
 vim-session https://github.com/xolox/vim-session
 vim-grepper https://github.com/mhinz/vim-grepper
 vim-easytags https://github.com/xolox/vim-easytags
+tagbar https://github.com/majutsushi/tagbar
 """.strip()
 
 GITHUB_ZIP = '%s/archive/master.zip'
