@@ -13,6 +13,7 @@ except ImportError:
 import zipfile
 import shutil
 import tempfile
+import ssl
 
 from os import path
 
@@ -75,7 +76,8 @@ def download_extract_replace(plugin_name, zip_path, temp_dir, source_dir):
         contents = None
         if futures:
             try:
-                r = urllib.request.urlopen(zip_path)
+                context = ssl._create_unverified_context()
+                r = urllib.request.urlopen(zip_path, context=context)
                 contents = r.read()
             except Exception as e:
                 print("Error: {0}".format(e))
