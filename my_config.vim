@@ -23,12 +23,16 @@ source $VIMEXTEND/sources_non_forked/ack.vim/plugin/ack.vim
 
 set number
 set wfh
-set wfw
+set wfw 
+" let g:molokai_original=1
+let g:rehash256 = 1
+colorscheme molokai
 " Location List Window
 autocmd FileType python nmap <buffer> <cr> <cr>:lcl<cr>
 
 " Fold
 set foldmethod=indent
+set foldlevelstart=20
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 " vnoremap <Space> zf
 " nnoremap <silent> <a-1> zM <CR>
@@ -66,10 +70,14 @@ let g:easytags_updatetime_min=1000000
 " => lightline plugin
 """"""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'molokai',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'relativepath', 'modified'] ],
+      \   'right': [ [ 'lineinfo' ], ['percent'] ]
+      \ },
+      \ 'inactive': {
+      \   'left': [ ['relativepath', 'modified'] ],
       \   'right': [ [ 'lineinfo' ], ['percent'] ]
       \ },
       \ 'component': {
