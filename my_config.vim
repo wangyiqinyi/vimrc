@@ -47,7 +47,17 @@ map L :tabn <CR>
 
 " <F1, F2, ...>
 map <F2> :TagbarToggle <CR>
-map <F5> :!start j:/DM73/develop/client/trunk/client.exe <CR>
+map <F5> :call FastRun() <CR>
+function! FastRun()
+    let filepath = 'fast_run'
+    for ext in ['.bat', '.sh']
+        let file = filepath . ext
+        if filereadable(file)
+            silent execute '!' . file
+            break
+        endif
+    endfor
+endfunction
 
 """"""""""""""""""""""""""""""
 " => vim-session plugin
