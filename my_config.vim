@@ -32,7 +32,7 @@ colorscheme molokai
 autocmd FileType python nmap <buffer> <cr> <cr>:lcl<cr>
 
 " Fold
-set foldmethod=marker
+set foldmethod=indent
 set foldlevelstart=20
 set foldcolumn=1
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -47,8 +47,14 @@ map H :tabp <CR>
 map L :tabn <CR>
 
 " <F1, F2, ...>
+map <F1> :call Svnup() <CR>
 map <F2> :TagbarToggle <CR>
 map <F5> :call FastRun() <CR>
+
+function! Svnup()
+   silent execute '!svn up' 
+endfunction
+
 function! FastRun()
     let filepath = 'fast_run'
     for ext in ['.bat', '.sh']
