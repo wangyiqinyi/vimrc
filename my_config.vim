@@ -121,5 +121,5 @@ let g:ctrlp_working_path_mode='ra'
 let g:ctrlp_by_filename=1
 let g:ctrlp_use_caching=1
 let g:ctrlp_clear_cache_on_exit=0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:5,results:5'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:5,results:20'
 let g:ctrlp_cache_dir = $VIMEXTEND.'/ctrlp_cache'
